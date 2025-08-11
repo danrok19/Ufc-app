@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './components/Root';
 import HomePage from './pages/HomePage';
 import SearchPage from './pages/SearchPage';
+import { SearchLoader } from './pages/searchLoader'
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
         }, 
         {
           path: '/search',
-          element: <SearchPage />
+          element: <SearchPage />,
+          loader: SearchLoader
         }
       ]
     }
