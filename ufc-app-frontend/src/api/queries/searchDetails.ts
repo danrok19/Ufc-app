@@ -23,7 +23,7 @@ export async function searchDetails(first: string, last: string): Promise<Search
         "last_name":"McGregor",
         "nickname":"The Notorious",
         "height":"5' 9",
-        "weight":"155 lbs.",
+        "weight":"155 lbs",
         "weight_class":"lightweight",
         "reach":"74.0",
         "stance":"Southpaw",
