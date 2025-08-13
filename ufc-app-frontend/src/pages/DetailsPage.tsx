@@ -1,5 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { BsFillPersonFill } from "react-icons/bs";
+import Chart from '../components/Chart';
 
 export default function DetailsPage(){
 
@@ -29,42 +30,10 @@ export default function DetailsPage(){
                 </div>
                 <div>
                     Stats
-                    <div>
-                        StrAcc
-                        <div className='border py-1 pl-1'>
-                            <div className="bg-red-500 h-5 flex justify-center items-center"
-                            style={{ width: data.StrAcc }} >
-                                {data.StrAcc}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        StrDef
-                        <div className='border py-1 pl-1'>
-                            <div className="bg-green-500 h-5 flex justify-center items-center"
-                            style={{ width: data.StrDef }} >
-                                {data.StrDef}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        TDAcc
-                        <div className='border py-1 pl-1'>
-                            <div className="bg-red-500 h-5 flex justify-center items-center"
-                            style={{ width: data.TDAcc }} >
-                                {data.TDAcc}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        TDDef
-                        <div className='border py-1 pl-1'>
-                            <div className="bg-green-500 h-5 flex justify-center items-center"
-                            style={{ width: data.TDDef }} >
-                                {data.TDDef}
-                            </div>
-                        </div>
-                    </div>
+                    {data.StrAcc ? <Chart statName={"StrAcc"} statValue={data.StrAcc} chartColor="red"/> : <></>}
+                    {data.StrDef ? <Chart statName={"StrDef"} statValue={data.StrDef} chartColor="green"/> : <></>}
+                    {data.TDAcc ? <Chart statName={"TDAcc"} statValue={data.TDAcc} chartColor="red"/> : <></>}
+                    {data.TDDef ? <Chart statName={"TDDef"} statValue={data.TDDef} chartColor="green"/> : <></>}
                 </div>
             </div>
         </div>
