@@ -1,17 +1,23 @@
 export interface SearchResult {
-    entity: {
-        country: {
-            alpha2: string,
-            name: string
-        },
-        gender: string,
-        id: number,
-        name: string,
-        teamColors: {
-            primary: string,
-            secondary: string,
-            text: string
-        }
-    },
-    score: number
+    first_name: string,
+    last_name: string,
+    nickname: null | string,
+    height: string,
+    weight: string,
+    weight_class: null | string,
+    reach: string,
+    stance: string,
+    wins: string,
+    losses: string,
+    draws: string,
+    belt: string,
+    date_of_birth: null | string,
+    SLpM: null | string,
+    StrAcc: null | string,
+    SApM: null | string,
+    StrDef: null | string,
+    TDAvg: null | string,
+    TDAcc: null | string,
+    TDDef: null | string,
+    SubAvg: null | string,
 }

@@ -1,24 +1,7 @@
 import type { SearchResult } from "../types/searchResult";
 
 interface SearchResponse{
-    results:
-    {
-        entity: {
-            country: {
-                alpha2: string,
-                name: string
-            },
-            gender: string,
-            id: number,
-            name: string,
-            teamColors: {
-                primary: string,
-                secondary: string,
-                text: string
-            }
-    },
-    score: number
-    }[]
+    results: SearchResult[]
 }
 
 export async function searchQuery(term: string): Promise<SearchResult[]>{
@@ -32,32 +15,59 @@ export async function searchQuery(term: string): Promise<SearchResult[]>{
 	//     }
     // };
     // const response = await fetch(
-    //     `https://mmaapi.p.rapidapi.com/api/mma/search/${term}`,
+    //     `https://ufc-fighters.p.rapidapi.com/fighters/search/${term}`,
     //     options
     // );
 
     // const data: SearchResponse = await response.json();
     
     //Hardcoded to not consume free reqs
-    const data: SearchResponse = {"results":[{"entity":{"country":{"alpha2":"IE","name":"Ireland"},"gender":"M","id":471736,"name":"Conor McGregor","teamColors":{"primary":"#374df5","secondary":"#374df5","text":"#ffffff"}},"score":394979.5},{"entity":{"country":{"alpha2":"SX","name":"Scotland"},"gender":"M","id":1042784,"name":"Lee McGregor","teamColors":{"primary":"#374df5","secondary":"#374df5","text":"#ffffff"}},"score":7083.1953}]}
+    const data: SearchResponse = {"results":[{"first_name":"Conor",
+        "last_name":"McGregor",
+        "nickname":"The Notorious",
+        "height":"5' 9",
+        "weight":"155 lbs.",
+        "weight_class":"lightweight",
+        "reach":"74.0",
+        "stance":"Southpaw",
+        "wins":"22",
+        "losses":"6",
+        "draws":"0",
+        "belt":"0",
+        "date_of_birth":"Jul 14, 1988",
+        "SLpM":"5.32",
+        "StrAcc":"49%",
+        "SApM":"4.66",
+        "StrDef":"54%",
+        "TDAvg":"0.67",
+        "TDAcc":"55%",
+        "TDDef":"66%",
+        "SubAvg":"0.1"
+    }]}
 
     return data.results.map((item) => {
         return {
-           entity: {
-            country: {
-                alpha2: item.entity.country.alpha2,
-                name: item.entity.country.name
-            },
-            gender: item.entity.gender,
-            id: item.entity.id,
-            name: item.entity.name,
-            teamColors: {
-                primary: item.entity.teamColors.primary,
-                secondary: item.entity.teamColors.secondary,
-                text: item.entity.teamColors.text
-            }
-        },
-        score: item.score 
+           "first_name": item.first_name,
+           "last_name": item.last_name,
+           "nickname": item?.nickname,
+           "height": item.height,
+           "weight": item.weight,
+           "weight_class": item.weight_class,
+           "reach": item.reach,
+           "stance": item.stance,
+           "wins": item.wins,
+           "losses": item.losses,
+           "draws": item.draws,
+           "belt": item.belt,
+           "date_of_birth": item.date_of_birth,
+            "SLpM": item.SLpM,
+            "StrAcc": item.StrAcc,
+            "SApM": item.SApM,
+            "StrDef": item.StrDef,
+            "TDAvg": item.TDAvg,
+            "TDAcc": item.TDAcc,
+            "TDDef": item.TDDef,
+            "SubAvg": item.SubAvg
         }
     });
 
