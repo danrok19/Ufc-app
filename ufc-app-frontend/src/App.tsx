@@ -6,6 +6,7 @@ import SearchPage from './pages/SearchPage';
 import DetailsPage from './pages/DetailsPage';
 import { SearchLoader } from './pages/searchLoader'
 import { DetailsLoader } from './pages/detailsLoader'
+import { homeQuery } from './api/queries/homeQuery';
 
 function App() {
 
@@ -16,7 +17,10 @@ function App() {
       children: [
         {
           index : true,
-          element: <HomePage />
+          element: <HomePage />,
+          loader: async function() {
+            return await homeQuery('Lightweight');
+          }
         }, 
         {
           path: '/search',

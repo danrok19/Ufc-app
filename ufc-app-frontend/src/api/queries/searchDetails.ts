@@ -7,7 +7,7 @@ export async function searchDetails(first: string, last: string): Promise<Search
     //     method: 'GET',
     //     headers: {
     // 	    'x-rapidapi-key': 'UFC_API_KEY',
-    // 	    'x-rapidapi-host': 'mmaapi.p.rapidapi.com'
+    // 	    'x-rapidapi-host': 'ufc-fighters.p.rapidapi.com'
     //     }
     // };
     // const response = await fetch(
