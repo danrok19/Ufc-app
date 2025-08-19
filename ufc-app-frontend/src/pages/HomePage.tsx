@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import { RiMedalLine } from "react-icons/ri";
 import { BsFillPersonFill } from "react-icons/bs";
 import { CiSquareMore } from "react-icons/ci";
+import { IoIosArrowUp } from "react-icons/io";
+
 
 interface ClassWeightNav{
     key: string, 
@@ -25,6 +27,10 @@ export default function HomePage(){
         setCountDisplay(15)
     }
 
+    const handleLessDisplay = () => {
+        setCountDisplay(5)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -37,7 +43,6 @@ export default function HomePage(){
 
         fetchData();
     }, [selectedClass])
-    console.log(selectedClass)
 
     const { champion, weight_class, contenders } = data![0]
 
@@ -92,7 +97,13 @@ export default function HomePage(){
                     onClick={handleMoreDisplay}>
                     <CiSquareMore />
                 </button>
-            </div> : <></>}
+            </div> : <div className="flex justify-center">
+                <button
+                    className="text-white text-4xl transition duration-200 ease-in-out hover:scale-110 cursor-pointer"
+                    onClick={handleLessDisplay}>
+                    <IoIosArrowUp />
+                </button>
+            </div>}
         </div>
     </div>
 }
