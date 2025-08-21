@@ -64,7 +64,8 @@ export default function HomePage(){
     const weightClassButtons = classes.map(c => {
         return <button 
                 key={c.key} 
-                className="bg-gray-200 rounded px-3 py-1 transition duration-200 ease-in-out hover:bg-gray-400 cursor-pointer"
+                className="bg-yellow-300 shadow-lg shadow-yellow-300/50 rounded px-3 py-1 
+                transition duration-300 ease-in-out hover:ring-2 hover:ring-black hover:scale-103 hover:shadow-none cursor-pointer"
                 onClick={() => handleClassChange(c.value)}>
                 {c.value}
             </button>
@@ -72,8 +73,7 @@ export default function HomePage(){
 
     console.log(data)
     return <div>
-        Home Page
-        <div className="flex gap-3 justify-center">
+        <div className="flex gap-3 justify-center my-8">
             {weightClassButtons}
         </div>
         <div className="flex justify-center text-white text-5xl mt-8">

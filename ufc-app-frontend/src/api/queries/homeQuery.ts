@@ -1,24 +1,30 @@
 import type { RankingResult } from "../types/rankingResult"
-
-const key = import.meta.env.VITE_UFC_API_KEY;
+//import axios from 'axios'
+const api_key = import.meta.env.VITE_UFC_API_KEY
 
 export async function homeQuery(weightclass: string): Promise<RankingResult[]> {
 
 
-    console.log(weightclass, key)
-    // const options = {
-    //     method: 'GET',
-    //     headers: {
-    // 	    'x-rapidapi-key': key,
-    // 	    'X-RapidAPI-host': 'ufc-fighters.p.rapidapi.com'
-    //     }
-    // };
-    // const response = await fetch(
-    //     `https://ufc-fighters.p.rapidapi.com/rankings/${weightclass}`,
-    //     options
-    // );
+    console.log(weightclass, api_key)
+    // try {
+    //     const options = {
+    //         headers: {
+    //             'x-rapidapi-key': api_key,
+    //             'X-RapidAPI-host': 'ufc-fighters.p.rapidapi.com'
+    //         }
+    //     };
 
-    // const data: RankingResult[] = await response.json();
+    //     const response = await axios.get<RankingResult[]>(
+    //         `https://ufc-fighters.p.rapidapi.com/rankings/${weightclass}`,
+    //         options
+    //     )
+
+    //     return response.data
+    // } catch (err) {
+    //     console.error("Smth went wrong: ", err)
+    //     return [];
+    // }
+
 
     //Hardcoded to not consume free reqs
 

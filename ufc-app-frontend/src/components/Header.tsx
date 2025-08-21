@@ -15,7 +15,7 @@ export default function Header(){
         setTerm('')
     }
 
-    return <div className="border-b-5 border-yellow-500 flex items-center justify-between bg-black">
+    return <div className="border-b-2 shadow-xl/40 shadow-yellow-300/50 border-yellow-500 flex items-center justify-between bg-black">
         <Link to="/" className="text-4xl font-semibold mx-5 my-2 text-white italic transition duration-300 ease-in-out 
                hover:text-yellow-600 hover:scale-95">UFC APP</Link>
         <form onSubmit={handleSubmit}>
