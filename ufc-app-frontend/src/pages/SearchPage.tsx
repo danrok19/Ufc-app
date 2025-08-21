@@ -28,7 +28,7 @@ export default function SearchPage(){
                 </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center border-t sm:border-0 mx-30 sm:mx-0 py-5 sm:py-0">
-                    <Link to={`/details?first_name=${fighter.last_name}&last_name=${fighter.first_name}`}
+                    <Link to={`/details?first_name=${fighter.first_name}&last_name=${fighter.last_name}`}
                     className="bg-[#191919] text-white rounded px-3 py-2 flex justify-center items-center gap-2 transition duration-200 ease-in-out hover:bg-gray-200 hover:text-black hover:cursor-pointer"
                     >
                         View Details

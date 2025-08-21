@@ -6,6 +6,7 @@ import { RiMedalLine } from "react-icons/ri";
 import { BsFillPersonFill } from "react-icons/bs";
 import { CiSquareMore } from "react-icons/ci";
 import { IoIosArrowUp } from "react-icons/io";
+import RowFighter from "../components/RowFighter";
 
 
 interface ClassWeightNav{
@@ -48,11 +49,7 @@ export default function HomePage(){
 
     const content = Object.values(contenders).map((fighter: string, index: number) =>{
         if (index + 1 <= countDisplay) {
-            return <div
-                key={fighter}
-                className="border text-black mx-5 my-1 rounded p-1 bg-gray-200 cursor-pointer transition duration-200 hover:scale-110">
-                {index + 1}. {fighter}
-            </div>
+            return <RowFighter key={fighter} fighter={fighter} index={index}/>
         }
         else {
             return null;

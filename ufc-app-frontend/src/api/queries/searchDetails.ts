@@ -15,7 +15,7 @@ export async function searchDetails(first: string, last: string): Promise<Search
     //     };
 
     //     const response = await axios.get<SearchResult>(
-    //         `https://ufc-fighters.p.rapidapi.com/fighters/data?first_name=${last}&last_name=${first}`,
+    //         `https://ufc-fighters.p.rapidapi.com/fighters/data?first_name=${first}&last_name=${last}`,
     //         options
     //     )
 
