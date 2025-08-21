@@ -2,8 +2,8 @@ import { searchDetails } from "../api/queries/searchDetails";
 
 export async function DetailsLoader({ request }: {request: Request}) {
     const { searchParams } = new URL(request.url);
-    const first = searchParams.get('first');
-    const last = searchParams.get('last');
+    const first = searchParams.get('first_name');
+    const last = searchParams.get('last_name');
 
     if (!first){
         throw new Error('Valid params not provided');

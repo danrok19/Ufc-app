@@ -1,25 +1,33 @@
 import type { SearchResult } from "../types/searchResult";
+import axios from 'axios'
 
 interface SearchResponse{
     results: SearchResult[]
 }
+const api_key = import.meta.env.VITE_UFC_API_KEY
 
 export async function searchQuery(term: string): Promise<SearchResult[]>{
     console.log(term)
 
-    // const options = {
-	//     method: 'GET',
-	//     headers: {
-	// 	    'x-rapidapi-key': 'UFC_API_KEY',
-	// 	    'x-rapidapi-host': 'ufc-fighters.p.rapidapi.com'
-	//     }
-    // };
-    // const response = await fetch(
-    //     `https://ufc-fighters.p.rapidapi.com/fighters/search/${term}`,
-    //     options
-    // );
+    try {
+        const options = {
+            headers: {
+                'x-rapidapi-key': api_key,
+                'X-RapidAPI-host': 'ufc-fighters.p.rapidapi.com'
+            }
+        };
 
-    // const data: SearchResponse = await response.json();
+        const response = await axios.get<SearchResult[]>(
+            `https://ufc-fighters.p.rapidapi.com/fighters/search/${term}`,
+            options
+        )
+
+        return response.data
+    } catch (err) {
+        console.error("Smth went wrong: ", err)
+        return [];
+    }
+
     
     //Hardcoded to not consume free reqs
     const data: SearchResponse = {"results":[{"first_name":"Conor",
