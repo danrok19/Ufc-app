@@ -6,29 +6,40 @@ using Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt =>
 {
    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddCors();
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
-    opt.User.RequireUniqueEmail = true;
+    //opt.User.RequireUniqueEmail = true;
+    opt.SignIn.RequireConfirmedEmail = false;
 })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseCors(x => x.AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithOrigins("http://localhost:5077"));
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
-
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<User>();
 

@@ -14,14 +14,14 @@ namespace Persistence
         {
             if (context.Users.Any()) return;
 
-            var adminUser = new Domain.User
-            {
-                DisplayName = "ADMIN",
-                UserName = "admin",
-                Email = "admin@gmail.com"
-            };
+            //var adminUser = new Domain.User
+            //{
+            //    DisplayName = "ADMIN",
+            //    UserName = "admin",
+            //    Email = "admin@gmail.com"
+            //};
 
-            await userManger.CreateAsync(adminUser, "Pa$$w0rd");
+            //await userManger.CreateAsync(adminUser, "Pa$$w0rd");
         }
     }
 }
