@@ -1,1 +1,4 @@
 ufc-app-frontend/.env
+ufc-app-backend/API/appsettings.json
+ufc-app-backend/API/appsettings.Development.json
+ufc-app-backend/API/app.db
