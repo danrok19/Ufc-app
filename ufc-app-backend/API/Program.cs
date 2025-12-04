@@ -1,7 +1,13 @@
+using Application.Implementation;
+using Application.Interface;
 using Domain;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Persistence;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,21 +27,36 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("AppSettings"));
+
+builder.Services.AddSingleton<IJwtSettings>(sp =>
+    sp.GetRequiredService<IOptions<JwtSettings>>().Value
+);
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration.GetSection("AppSettings:Issuer").Value,
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration.GetSection("AppSettings:Audience").Value,
+            ValidateLifetime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)),
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
     .WithOrigins("http://localhost:5077"));
-
-// Configure the HTTP request pipeline.
 
 //app.UseHttpsRedirection();
 app.UseAuthentication();

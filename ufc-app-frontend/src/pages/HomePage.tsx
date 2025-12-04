@@ -61,7 +61,7 @@ export default function HomePage(){
     const weightClassButtons = classes.map(c => {
         return <button 
                 key={c.key} 
-                className="bg-yellow-300 shadow-lg shadow-yellow-300/50 rounded px-3 py-1 
+                className="bg-yellow-300 shadow-lg shadow-black-300/50 rounded px-3 py-1 
                 transition duration-300 ease-in-out hover:ring-2 hover:ring-black hover:scale-103 hover:shadow-none cursor-pointer"
                 onClick={() => handleClassChange(c.value)}>
                 {c.value}
@@ -69,14 +69,18 @@ export default function HomePage(){
     })
 
     console.log(data)
-    return <div>
+    return <div className="flex">
+    <div className="flex-1">
+        <p className="my-5 mx-15 text-5xl font-bold">Featured News</p>
+    </div>
+    <div className="flex-1">
         <div className="flex gap-3 justify-center my-8">
             {weightClassButtons}
         </div>
-        <div className="flex justify-center text-white text-5xl mt-8">
+        <div className="flex justify-center text-5xl mt-8">
             {weight_class}
         </div>
-        <div className="flex justify-center gap-3 text-white text-2xl my-5">
+        <div className="flex justify-center gap-3 text-2xl my-5">
             <div className="flex justify-center items-center gap-2 cursor-pointer">
                 <RiMedalLine className="text-yellow-500" />
                 <p className="text-4xl">{champion}</p>
@@ -86,21 +90,22 @@ export default function HomePage(){
             </div>
         </div>
         <div className="flex flex-col justify-center m-auto w-80">
-            <p className="text-white text-4xl border-b text-center mb-2">Contenders</p>
+            <p className="text-4xl border-b text-center mb-2">Contenders</p>
             {content}
             {countDisplay == 5 ? <div className="flex justify-center">
                 <button
-                    className="text-white text-4xl transition duration-200 ease-in-out hover:scale-110 cursor-pointer"
+                    className="text-4xl transition duration-200 ease-in-out hover:scale-110 cursor-pointer"
                     onClick={handleMoreDisplay}>
                     <CiSquareMore />
                 </button>
             </div> : <div className="flex justify-center">
                 <button
-                    className="text-white text-4xl transition duration-200 ease-in-out hover:scale-110 cursor-pointer"
+                    className="text-4xl transition duration-200 ease-in-out hover:scale-110 cursor-pointer"
                     onClick={handleLessDisplay}>
                     <IoIosArrowUp />
                 </button>
             </div>}
         </div>
+    </div>
     </div>
 }
