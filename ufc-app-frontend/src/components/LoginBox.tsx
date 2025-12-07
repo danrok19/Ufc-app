@@ -1,18 +1,43 @@
-import React from 'react';
-import  { useForm, type FieldValues } from 'react-hook-form'
+import { useContext } from 'react';
+import  { useForm } from 'react-hook-form'
 import { loginSchema, type LoginSchema } from '../schemas/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AuthContext } from '../context/auth-context';
 
 export default function LoginBox() {
-    const { register, handleSubmit} = useForm<LoginSchema>({
+
+    const auth = useContext(AuthContext);
+
+    const { register, handleSubmit } = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema)
     });
 
-    const onSubmit = (data: FieldValues) => {
-        console.log(data)
+    const onSubmit = async (data: LoginSchema) => {
+        try{
+            const response = await fetch("http://localhost:5077/api/Auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: data.email,
+                    password: data.password
+                })
+            });
+            if (!response.ok) return;
+
+            const result = await response.text()
+
+            console.log(result)
+            auth.login(result)
+
+        } catch(err) {
+            console.log(err)
+        }
     }
+
   return (
-    <div className='border w-140 m-auto py-5 bg-lime-100 my-10'>
+    <div className='border shadow-xl/40 shadow-yellow-300/50 border-yellow-500 w-140 m-auto py-5 bg-black my-10 text-white'>
       <div>
         <h2 className='font-bold text-center text-xl'>Sign in to ur account</h2>
       </div>
@@ -28,7 +53,7 @@ export default function LoginBox() {
                     required 
                     autoComplete='email'
                     {...register('email')} 
-                    className='w-full'/>
+                    className='w-full px-1' />
                 </div>
             </div>
             <div className='mt-4'>
@@ -48,7 +73,7 @@ export default function LoginBox() {
                     required 
                     autoComplete='current-password' 
                     {...register('password')}
-                    className='w-full'
+                    className='w-full px-1'
                     />
                 </div>
             </div>

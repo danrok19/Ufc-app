@@ -56,7 +56,7 @@ var app = builder.Build();
 
 app.UseCors(x => x.AllowAnyHeader()
     .AllowAnyMethod()
-    .WithOrigins("http://localhost:5077"));
+    .WithOrigins("http://localhost:5173"));
 
 //app.UseHttpsRedirection();
 app.UseAuthentication();

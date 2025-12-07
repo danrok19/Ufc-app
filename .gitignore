@@ -2,3 +2,6 @@ ufc-app-frontend/.env
 ufc-app-backend/API/appsettings.json
 ufc-app-backend/API/appsettings.Development.json
 ufc-app-backend/API/app.db
+ufc-app-backend/API/app.db-shm
+ufc-app-backend/API/app.db-wal
+
