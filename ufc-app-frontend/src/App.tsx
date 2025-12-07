@@ -7,6 +7,7 @@ import DetailsPage from './pages/DetailsPage';
 import { SearchLoader } from './pages/searchLoader'
 import { DetailsLoader } from './pages/detailsLoader'
 import { homeQuery } from './api/queries/homeQuery';
+import LoginPage from './pages/LoginPage';
 
 function App() {
 
@@ -31,6 +32,10 @@ function App() {
           path: '/details',
           element: <DetailsPage />,
           loader: DetailsLoader
+        },
+        {
+          path: '/login',
+          element: <LoginPage />
         }
       ]
     }
