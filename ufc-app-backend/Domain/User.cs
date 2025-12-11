@@ -13,5 +13,7 @@ namespace Domain
         public string? ImageUrl { get; set; }
 
         public string Role { get; set; } = string.Empty;
+
+        public virtual ICollection<Follow>? Follows { get; set; }
     }
 }
