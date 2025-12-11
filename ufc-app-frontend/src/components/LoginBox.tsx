@@ -3,10 +3,12 @@ import  { useForm } from 'react-hook-form'
 import { loginSchema, type LoginSchema } from '../schemas/loginSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthContext } from '../context/auth-context';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginBox() {
 
     const auth = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const { register, handleSubmit } = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema)
@@ -28,8 +30,8 @@ export default function LoginBox() {
 
             const result = await response.text()
 
-            console.log(result)
             auth.login(result)
+            navigate('/')
 
         } catch(err) {
             console.log(err)
