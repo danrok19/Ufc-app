@@ -58,5 +58,16 @@ namespace Application.Implementation
 
             return true;
         }
+
+        public async Task<List<News>> GetAllNews()
+        {
+            var news = await context.News
+                .OrderByDescending(n => n.PublishDate)
+                .ToListAsync();
+
+            await context.SaveChangesAsync();
+            
+            return news;
+        }
     }
 }

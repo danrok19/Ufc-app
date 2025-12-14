@@ -8,7 +8,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController(IUserService userService) : BaseApi
+    public class UserController(IUserService userService, IAdminService adminService) : BaseApi
     {
         [HttpPost("follow")]
         public async Task<ActionResult<Follow>> FollowFighter(UserFollowDTO request)
@@ -33,6 +33,20 @@ namespace API.Controllers
         {
             bool isFollowing = await userService.CheckIfFollowsFighter(userId, fighterName);
             return isFollowing;
+        }
+
+        [HttpPost("addnews")]
+        public async Task<ActionResult> AddNews(string title, string content, DateTime publishDate, string userId)
+        {
+            try
+            {
+                await adminService.AddNewsAsync(title, content, publishDate, userId);
+                return Ok("News added successfully.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
         }
 
 

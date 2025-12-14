@@ -15,22 +15,24 @@ export default function DetailsPage() {
     useEffect(() => {
         const checkFollowStatus = async () => {
             try {
-                const response = await axios.get(
-                    "http://localhost:5077/api/User/isfollowing",
-                    {
-                    params: {
-                        userId: auth.userId,
-                        fighterName: data.first_name + " " + data.last_name
-                    }
+                if (auth.isAuthenticated) {
+                    const response = await axios.get(
+                        "http://localhost:5077/api/User/isfollowing",
+                        {
+                            params: {
+                                userId: auth.userId,
+                                fighterName: data.first_name + " " + data.last_name
+                            }
+                        }
+                    );
+                    setIsFollowed(response.data)
                 }
-                );
-                setIsFollowed(response.data)
             } catch (err) {
                 console.log("error: ", err)
             }
         }
         checkFollowStatus();
-    }, [auth.userId, data.first_name, data.last_name])
+    }, [auth.userId, data.first_name, data.last_name, auth.isAuthenticated])
 
     const onSubmit = async () => {
         try {
@@ -46,6 +48,7 @@ export default function DetailsPage() {
                     }
                 });
             const result = response.data;
+            setIsFollowed(response.data)
             console.log("result: ", result)
 
         } catch (err) {
@@ -90,13 +93,13 @@ export default function DetailsPage() {
                             <p>Weight: <span className='text-2xl'>{data.weight}</span></p>
                             <p>Reach: <span className='text-2xl'>{data.reach}</span></p>
                             <div>
-                                {isFollowed ? 
+                                {isFollowed ?
                                     <button
-                                    className='border cursor-pointer p-1 rounded mt-2 w-4/5  hover:bg-black hover:text-white transition duration-300 ease-in-out'
-                                    onClick={onSubmitUnFollow}>Unfollow</button> :
+                                        className='border cursor-pointer p-1 rounded mt-2 w-4/5  hover:bg-black hover:text-white transition duration-300 ease-in-out'
+                                        onClick={onSubmitUnFollow}>Unfollow</button> :
                                     <button
-                                    className='border cursor-pointer p-1 rounded mt-2 w-4/5  hover:bg-black hover:text-white transition duration-300 ease-in-out'
-                                    onClick={onSubmit}>Follow</button>}
+                                        className='border cursor-pointer p-1 rounded mt-2 w-4/5  hover:bg-black hover:text-white transition duration-300 ease-in-out'
+                                        onClick={onSubmit}>Follow</button>}
                             </div>
                         </div>
                     </div>
