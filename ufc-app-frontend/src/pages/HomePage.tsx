@@ -7,6 +7,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { CiSquareMore } from "react-icons/ci";
 import { IoIosArrowUp } from "react-icons/io";
 import RowFighter from "../components/RowFighter";
+import type { NewsResult } from "../api/types/newsResult";
 
 
 interface ClassWeightNav{
@@ -14,9 +15,17 @@ interface ClassWeightNav{
     value: string
 }
 
+type LoaderData = {
+  homeData: RankingResult[]
+  newsData: NewsResult[]
+}
+
+
 export default function HomePage(){
     //const data: RankingResult[] = useLoaderData()
-    const [data, setData] = useState<RankingResult[]>(useLoaderData())
+    const { homeData, newsData } = useLoaderData() as LoaderData
+    const [data, setData] = useState<RankingResult[]>(homeData)
+    const [dataNews] = useState<NewsResult[] | null>(newsData)
     const [selectedClass, setSelectedClass] = useState("Lightweight")
     const [countDisplay, setCountDisplay] = useState(5)
 
@@ -68,10 +77,25 @@ export default function HomePage(){
             </button>
     })
 
+    let newsContent;
+    if(dataNews){
+        newsContent = Object.values(dataNews).map((news: NewsResult) => {
+        return <div key={news.id}
+        className="mx-8 p-3 bg-linear-to-r from-yellow-300 to-black inset-shadow-sm rounded
+        transition duration-500 ease-in-out hover:from-black hover:text-white cursor-pointer
+        hover:scale-105 hover:inset-shadow-white/50 overflow-hidden line-clamp-4 max-h-[115px]
+        hover:line-clamp-none hover:max-h-none">
+            <p className="font-bold text-xl">{news.title}</p>
+            <p className="text-white">{news.content}</p>
+        </div>
+    })
+    }
+
     console.log(data)
     return <div className="flex">
     <div className="flex-1">
         <p className="my-5 mx-15 text-5xl font-bold">Featured News</p>
+        {newsContent}
     </div>
     <div className="flex-1">
         <div className="flex gap-3 justify-center my-8">

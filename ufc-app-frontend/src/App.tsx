@@ -10,6 +10,7 @@ import { homeQuery } from './api/queries/homeQuery';
 import LoginPage from './pages/LoginPage';
 import { AuthContext } from './context/auth-context';
 import { useAuth } from './hooks/auth-hook';
+import { newsQuery } from './api/queries/newsQuery';
 
 function App() {
 
@@ -23,7 +24,15 @@ function App() {
           index : true,
           element: <HomePage />,
           loader: async function() {
-            return await homeQuery('Lightweight');
+            const [homeData, newsData] = await Promise.all([
+              homeQuery('Lightweight'),
+              newsQuery()
+            ]);
+
+            return {
+              homeData,
+              newsData
+            }
           }
         }, 
         {
