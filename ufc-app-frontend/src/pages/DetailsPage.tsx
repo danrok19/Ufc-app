@@ -81,7 +81,7 @@ export default function DetailsPage() {
 
     console.log(data)
     return <div className='flex bg-[#f1f1f1] text-white min-w-xl'>
-        <div className='mx-auto my-20 border w-2/3 p-5 text-black'>
+        <div className='mx-auto my-20 border w-2/3 p-5 text-black bg-gray-200'>
             <div className='flex-col flex lg:flex-row whitespace-nowrap'>
                 <div className=' flex-1'>
                     <div className='flex'>
